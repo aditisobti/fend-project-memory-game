@@ -104,7 +104,7 @@ function starAndCountReset() {
 }
 
 /*
- * Display alert message that the game is over and stop the game timer.
+ * Display modal dialog message that the game is over and stop the game timer.
  */
 function displayFinishedGameMessage() {
     var openedCards = document.querySelectorAll(".card.show.animated.match");
@@ -112,8 +112,8 @@ function displayFinishedGameMessage() {
         letsStop = 1;
         clearInterval(timer);
         // The delay should be greater than flipping the cards or else it will show message before matched card state.
-        setTimeout(function () {
-            alert("Congratulations! You finished the game.");
+        setTimeout(function () {            
+            document.getElementById("finish").showModal(); 
         }, 100);
     } else {
         console.log("playmore");
