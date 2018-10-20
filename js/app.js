@@ -3,7 +3,8 @@
  * cards are mapped to these characters.
  * like fa-diamond == 'a' etc.
  */
-const orginalCards = ['a', 'a', 'b', 'b', 'c', 'c', 'd', 'd', 'e', 'e', 'f', 'f', 'g', 'g', 'h', 'h'];
+var orginalCards = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+orginalCards = orginalCards.concat(orginalCards);
 var intialCount = 0;
 var min = 0;
 var sec = 0;
@@ -111,11 +112,12 @@ function displayFinishedGameMessage() {
     if (openedCards.length == 16) {
         letsStop = 1;
         clearInterval(timer);
-        // The delay should be greater than flipping the cards or else it will show message before matched card state.
+        // The delay should be greater than flipping the cards or 
+        // else it will show message before matched card state.
         setTimeout(function () {
             document.getElementById("finish").showModal();
         }, 100);
-    } 
+    }
 }
 
 /*
@@ -147,7 +149,8 @@ function playGame(event) {
         eleTarget.removeEventListener('click', playGame);
     } else {
         var elementTobeMatched = eleOpened.firstElementChild;
-        if (eleTarget.firstElementChild.getAttribute("class") === elementTobeMatched.getAttribute("class")) {
+        if (eleTarget.firstElementChild.getAttribute("class") 
+            === elementTobeMatched.getAttribute("class")) {
             // Cards are matched.
             eleOpened.setAttribute("class", "card show animated match");
             eleTarget.setAttribute("class", "card show animated match");
