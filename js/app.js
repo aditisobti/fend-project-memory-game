@@ -62,6 +62,32 @@ function createStar() {
 }
 
 /*
+ * Display modal dialog message that the game is over and stop the game timer.
+ */
+function displayFinishedGameMessage() {
+    const openedCards = document.querySelectorAll(".card.show.animated.match");
+    if (openedCards.length == 16) {
+        letsStop = 1;
+        clearInterval(timer);
+        // The delay should be greater than flipping the cards or 
+        // else it will show message before matched card state.
+        setTimeout(function () {
+            const message = document.getElementById("time");
+            if (message) {
+                message.innerText = "Time to finish - " + document.querySelector(".timer").innerText;
+            }
+            const stars = document.getElementById("stars");
+            const li = document.querySelectorAll(".fa.fa-star");
+            for (var i = 0; i < li.length; i++) {
+                stars.appendChild(createStar());
+            }
+
+            document.getElementById("finish").showModal();
+        }, 100);
+    }
+}
+
+/*
  * Reset stars and the count of the number of moves and the timer.
  */
 function starAndCountReset() {
@@ -105,22 +131,6 @@ function starAndCountReset() {
 }
 
 /*
- * Display modal dialog message that the game is over and stop the game timer.
- */
-function displayFinishedGameMessage() {
-    const openedCards = document.querySelectorAll(".card.show.animated.match");
-    if (openedCards.length == 16) {
-        letsStop = 1;
-        clearInterval(timer);
-        // The delay should be greater than flipping the cards or 
-        // else it will show message before matched card state.
-        setTimeout(function () {
-            document.getElementById("finish").showModal();
-        }, 100);
-    }
-}
-
-/*
  * EventListener when you click the card. This will also support animation.
  */
 function playGame(event) {
@@ -149,7 +159,7 @@ function playGame(event) {
         eleTarget.removeEventListener('click', playGame);
     } else {
         var elementTobeMatched = eleOpened.firstElementChild;
-        if (eleTarget.firstElementChild.getAttribute("class") 
+        if (eleTarget.firstElementChild.getAttribute("class")
             === elementTobeMatched.getAttribute("class")) {
             // Cards are matched.
             eleOpened.setAttribute("class", "card show animated match");
@@ -226,6 +236,13 @@ const restart = document.getElementById("restart");
 if (restart) {
     // Bind click so that gamer can Re-Initalize the game.
     restart.addEventListener('click', init);
+}
+
+const playAgain = document.getElementById("playAgain");
+if (playAgain) {
+    playAgain.addEventListener('click', function () {
+        window.location.href = window.location.href;
+    });
 }
 
 init();
