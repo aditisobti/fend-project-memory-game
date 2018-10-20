@@ -3,7 +3,7 @@
  * cards are mapped to these characters.
  * like fa-diamond == 'a' etc.
  */
-var orginalCards = ['a', 'a', 'b', 'b', 'c', 'c', 'd', 'd', 'e', 'e', 'f', 'f', 'g', 'g', 'h', 'h'];
+const orginalCards = ['a', 'a', 'b', 'b', 'c', 'c', 'd', 'd', 'e', 'e', 'f', 'f', 'g', 'g', 'h', 'h'];
 var intialCount = 0;
 var min = 0;
 var sec = 0;
@@ -53,8 +53,8 @@ function shuffle(array) {
  *  Create a new star
  */
 function createStar() {
-    var star = document.createElement("li");
-    var iElement = document.createElement("i");
+    const star = document.createElement("li");
+    const iElement = document.createElement("i");
     iElement.setAttribute("class", "fa fa-star")
     star.appendChild(iElement);
     return star;
@@ -68,19 +68,19 @@ function starAndCountReset() {
     intialCount = 0;
 
     // Reset Timer.
-    var span = document.querySelector(".timer");
+    const span = document.querySelector(".timer");
     if (span) {
         span.innerText = "0";
     }
 
     // Reset Moves.
-    var moves = document.querySelector(".moves");
+    const moves = document.querySelector(".moves");
     if (moves) {
         moves.textContent = 0;
     }
 
     // Delete any stars
-    var li = document.querySelectorAll(".fa.fa-star");
+    const li = document.querySelectorAll(".fa.fa-star");
     li.forEach((element) => {
         element.parentElement.remove();
     });
@@ -94,7 +94,7 @@ function starAndCountReset() {
     initTimer();
 
     // Re create stars
-    var stars = document.getElementsByClassName("stars");
+    const stars = document.getElementsByClassName("stars");
 
     if (stars[0] && stars[0].children.length <= 3) {
         stars[0].appendChild(createStar());
@@ -107,7 +107,7 @@ function starAndCountReset() {
  * Display modal dialog message that the game is over and stop the game timer.
  */
 function displayFinishedGameMessage() {
-    var openedCards = document.querySelectorAll(".card.show.animated.match");
+    const openedCards = document.querySelectorAll(".card.show.animated.match");
     if (openedCards.length == 16) {
         letsStop = 1;
         clearInterval(timer);
@@ -115,9 +115,7 @@ function displayFinishedGameMessage() {
         setTimeout(function () {
             document.getElementById("finish").showModal();
         }, 100);
-    } else {
-        console.log("playmore");
-    }
+    } 
 }
 
 /*
@@ -126,7 +124,7 @@ function displayFinishedGameMessage() {
 function playGame(event) {
     intialCount++;
 
-    var moves = document.querySelector(".moves");
+    const moves = document.querySelector(".moves");
     // Set the counter text.
     if (moves) {
         moves.textContent = intialCount;
@@ -138,11 +136,11 @@ function playGame(event) {
     // Moves >= 25 - 1 star.
     // Moves >= 30 - 0 stars.
     if (intialCount == 30 || intialCount == 25 || intialCount == 20) {
-        var li = document.querySelector(".fa.fa-star");
+        const li = document.querySelector(".fa.fa-star");
         li.remove();
     }
-    var eleTarget = event.currentTarget;
-    var eleOpened = document.querySelector(".deck .card.open.show");
+    const eleTarget = event.currentTarget;
+    const eleOpened = document.querySelector(".deck .card.open.show");
     if (!eleOpened) {
         // New card opened.
         eleTarget.setAttribute("class", "card show open");
@@ -179,8 +177,8 @@ function init() {
     // Star reset
     starAndCountReset();
     // Shuffle the cards.
-    var shuffleCards = shuffle(orginalCards);
-    var htmlCards = document.querySelectorAll(".deck .card");
+    const shuffleCards = shuffle(orginalCards);
+    const htmlCards = document.querySelectorAll(".deck .card");
 
     // Assign the CSS classes based on shuffled array list.
     htmlCards.forEach((element, index) => {
@@ -221,7 +219,7 @@ function init() {
     });
 }
 
-var restart = document.getElementById("restart");
+const restart = document.getElementById("restart");
 if (restart) {
     // Bind click so that gamer can Re-Initalize the game.
     restart.addEventListener('click', init);
