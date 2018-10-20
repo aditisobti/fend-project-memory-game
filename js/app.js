@@ -1,7 +1,7 @@
 /*
  * Create a list that holds all of your cards
- *  cards are mapped to these characters.
- *  like fa-diamond == 'a' etc.
+ * cards are mapped to these characters.
+ * like fa-diamond == 'a' etc.
  */
 var orginalCards = ['a', 'a', 'b', 'b', 'c', 'c', 'd', 'd', 'e', 'e', 'f', 'f', 'g', 'g', 'h', 'h'];
 var intialCount = 0;
@@ -84,7 +84,7 @@ function starAndCountReset() {
     li.forEach((element) => {
         element.parentElement.remove();
     });
-    
+
     // Timer reset.
     hours = 0;
     min = 0;
@@ -112,8 +112,8 @@ function displayFinishedGameMessage() {
         letsStop = 1;
         clearInterval(timer);
         // The delay should be greater than flipping the cards or else it will show message before matched card state.
-        setTimeout(function () {            
-            document.getElementById("finish").showModal(); 
+        setTimeout(function () {
+            document.getElementById("finish").showModal();
         }, 100);
     } else {
         console.log("playmore");
@@ -173,17 +173,16 @@ function playGame(event) {
 }
 
 /*
- * Initalize the game.
+ * This function Initalize the game.
  */
 function init() {
     // Star reset
     starAndCountReset();
     // Shuffle the cards.
     var shuffleCards = shuffle(orginalCards);
-
     var htmlCards = document.querySelectorAll(".deck .card");
 
-    // Flip to hide all cards.
+    // Assign the CSS classes based on shuffled array list.
     htmlCards.forEach((element, index) => {
         element.removeAttribute("class");
         const child = element.firstElementChild;
@@ -224,7 +223,7 @@ function init() {
 
 var restart = document.getElementById("restart");
 if (restart) {
-    // Bind click to restart element
+    // Bind click so that gamer can Re-Initalize the game.
     restart.addEventListener('click', init);
 }
 
