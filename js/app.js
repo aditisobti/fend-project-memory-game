@@ -81,6 +81,12 @@ function displayFinishedGameMessage() {
             for (var i = 0; i < li.length; i++) {
                 stars.appendChild(createStar());
             }
+            // Get moves.
+            const moves = document.querySelector(".moves");
+            const movesModal = document.getElementById("moves");
+            if(movesModal) {
+                movesModal.innerText = moves.innerText;
+            }
 
             document.getElementById("finish").showModal();
         }, 100);
